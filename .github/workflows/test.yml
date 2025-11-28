@@ -1,0 +1,25 @@
+# GitHub Actions 설정 파일
+name: 테스트 자동 실행
+
+# 언제 실행할지 설정
+on:
+  push:           # 코드를 push하면
+    branches:
+      - main      # main 브랜치에
+
+# 무엇을 실행할지
+jobs:
+  test:
+    runs-on: ubuntu-latest    # GitHub 서버(Ubuntu)에서 실행
+
+    steps:
+      - name: 코드 가져오기
+        uses: actions/checkout@v4
+
+      - name: Python 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 테스트 실행
+        run: python test_calculator.py
